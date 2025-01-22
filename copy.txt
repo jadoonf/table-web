@@ -1,0 +1,86 @@
+
+HEADLINE: 
+Find and stop malware in your codebase (analogy ie. Snyk; find and fix vulns in your code)
+
+THE PROBLEM EDUCATION SECTION: 
+<proof of malware incidents related to GitHub> 
+
+1. Malicious dependency (pypi, npm) eg. Ledger, lottie
+    1. Info stealers
+    2. Cryptominers
+    3. APTs
+2. Malicious CI tool eg. Codecov
+3. Malicious PR eg. Exo, ultralytics 
+
+Talk about impact.. $$ amount, disruption, reputation and trust (business ending for frontier teams)
+
+
+hypthesis: Malware in code is the biggest threat surface, and leading cause of breaches. No one has it under control (due to design, incentives, etc.) and the way we’ve done secuirty is reactive. 
+
+[analogies: malware in email (proofpoint-> material-> sublime) - middle circle 
+Malware in endpoints / APTs (crowdstrike for laptop, what about modern envs?) —smaller circle of surface ] then code is the largest circle by surface (and supply chain ~80% of it, cite npm stat on reuse) 
+
+idea: 
+ infographic showing interesting numbers on modern threat surface: 
+- An average AI agent uses: X deps, Y transitives, X CI runs surface. 
+- An avg crypto library eg. web3.js - same etc. 
+
+Future idea: convert to a search tool like project discovery where you input GitHub repo (or append .lstn to your GitHub repo path, and it shows the supply chain posture and risk surface) 
+< Takeaway is that audience should be able to visualize and understand the massive threat surface that relates to their everyday. But not in a FUD way, more educative. and grounded in wave and narrative that is first principles.> 
+
+
+
+
+
+WHATS WRONG WITH STATUS QUO: 
+Modern attacks are multi-stage, complex payloads and evade traditional detection through conditionals, obfuscation etc. 
+
+Looking at code alone can’t tell if it’s malicious (rice theorem). Since malicious is a behavioral characteristic. 
+
+So you need to run it and monitor its behavior. 
+
+Our insight: Since envs are development (and malware triggers at build-time) —> these tools need to be built for eng teams, not security. Even though eng minded security teams can be an audience. 
+
+
+
+HOW IT WORKS
+1. Plug into GitHub repos in 1 step (show actions workflow stub)
+2. Run CI  (agnostic of stack or what you run in it) 
+3. See alerts 
+    1. In your tools and workflows (GitHub PR, Slack alert) 
+    2. Detailed view for forensics and audit in dashboard 
+
+APPROACH: behavioral analysis at build-time
+- Finds unknown threats even before they’re discolsoed 
+- Block malicious behavior by defaiiult when blast radius is smallest 
+- Educate on response, continuous monitoring and assurance -> peace of mind 
+
+
+TECH: Jibril: runtime security engine 
+
+Runtime monitoring: powered by eBPF, at the kernel level. Captures sys level interactions  
+
+Threat detection & response: detection recipes that capture the temporal view of an attack, not isolated events, and how they relate. 
+
+Granular policy and response. Whotelisting, tuning, reduce Fps 
+
+Lightweight arch with zero overehead; using new data structures and arch for runtime secuirty (.vs previous sys call tracing based approaches) 
+
+USE CASES:
+
+- Catch malicious dependencies before they strike. Even private packages inside your org (that no SCA covers) 
+    - Protect sensitive data and secrets
+    - Protect resources (eg. Crypto jacking) 
+- Prevent supply chain attacks before they impact your users/prod. 
+    - Now advanced APT threats — require more than static and hardening -> full malware detection in your GitHub (like EDR for build envs) 
+- Insider threats 
+    - Since we are behavioral analysis, and not limited to external DBS and references. (Like UEBI)
+    - Malicious maintainers in OSS repos, PRs (backdooring popular adopted GitHub projects like comfy UI, ultralutics, eco) 
+- Secure ML artifacts: malicious pickles, datasets, models from OSS etc. and other binary formats (best in class coverage) - uses dynamic analysis. 
+
+
+
+
+CTA: Stay vigilant.Ship secure code with confidence. 
+
+Stay ahead of emerging threats. 
